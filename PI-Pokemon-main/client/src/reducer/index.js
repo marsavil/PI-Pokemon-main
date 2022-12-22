@@ -3,7 +3,9 @@ import { GET_POKEMONS,
   FILTER_BY_ORIGIN,
   ORDER_BY_NAME,
   ORDER_BY_ATTACK,
-  SORT_BY_TYPE } from '../actions_Type/index.js'
+  SORT_BY_TYPE,
+  GET_POKEMON_BY_NAME, 
+  POST_POKEMON} from '../actions_Type/index.js'
 
 const initialState = {
   pokemons: [],
@@ -101,6 +103,15 @@ function rootReducer(state = initialState, action){
       return {
         ...state,
         filteredPokemons: action.payload === 'allTypes' ? state.pokemons: sortedPokemonsByType
+      }
+    case  GET_POKEMON_BY_NAME :
+      return {
+        ...state,
+        filteredPokemons: [action.payload]
+      }
+    case POST_POKEMON :
+      return {
+        ...state,
       }
     default:
       return state;

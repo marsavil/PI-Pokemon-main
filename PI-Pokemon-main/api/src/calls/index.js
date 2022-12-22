@@ -24,7 +24,8 @@ async function getPokemonsFromApi(){ // trae los pokemons de la api
                   return {
                     name: t.type.name
                   }
-                })
+                }),
+                createdInDb : false
               };
             });
     return pokemonsFromApi;
@@ -32,7 +33,6 @@ async function getPokemonsFromApi(){ // trae los pokemons de la api
 
 
 async function getPokemonsFromDb() {
-  let pokemonsFromApi = [];
   try{
     const pokemonsStored = await Pokemon.findAll({
       include:{
@@ -75,7 +75,8 @@ async function getPokemonByIdFromApi(id) {
               speed: p.data.stats[3].base_stat,
               height: p.data.height,
               weight: p.data.weight,
-              types: p.data.types.map((t) => { return {name: t.type.name}})
+              types: p.data.types.map((t) => { return {name: t.type.name}}),
+              createdInDb : false
           };  // return
 
       }else {
@@ -101,7 +102,8 @@ async function getPokemonByNameFromApi(name) {
               speed: pokemonFound.data.stats[3].base_stat,
               height: pokemonFound.data.height,
               weight: pokemonFound.data.weight,
-              types: pokemonFound.data.types.map((t) => { return {name: t.type.name}})
+              types: pokemonFound.data.types.map((t) => { return {name: t.type.name}}),
+              createdInDb : false
           }; 
 
       }else {

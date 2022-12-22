@@ -17,9 +17,9 @@ router.get('/', async (req, res, next) => {
   try {       
     const {name} = req.query;
       if (name){
-        let search = await getPokemonByNameFromApi(name);
+        let search = await getPokemonByNameFromApi(name.toLowerCase());
             if (search.error){ // no encontrado en la API externa
-                search = await getPokemonsByNameFromDb(name); 
+                search = await getPokemonsByNameFromDb(name.toLowerCase()); 
 
                 if (!search){ // no encontrado en DB
                     return res.status(404).json({"message": "Pokemon not found"});
@@ -57,47 +57,7 @@ router.get('/:idPokemon', async (req, res, next) => {
 
 
 
-router.post('/', async (req, res, next) => {
-  
-  const {name, image, hp, attack, defense, speed, height, weigth, types} = req.body;
 
-  if (!name || !image) {
-    return res.status(404).json({error : 'Name and image are required fields.'});
-  }
-
-
-        //Verificar que el nombre este disponible.
-  let search = await getPokemonByNameFromApi(name);
-
-        // busqueda en la base de datos
-  if (search.error){ // no encontrado en la API externa
-    search = await getPokemonsByNameFromDb(name); }
-
-  if (search){
-            return res.status(400).json({ error: "Pokemon name already exists." });
-  }
-    try {
-        const createdPokemon = await Pokemon.create(req.body);
-        let allTypes = await Type.findAll()
-        console.log(allTypes)
-        if(!allTypes.length) {
-          
-          allTypes = await getTypes()
-        }
-        types.forEach(t => {
-            let filteredType = allTypes.filter(type => type.name.toLowerCase() == t.toLowerCase())
-            createdPokemon.addType(filteredType)
-            console.log(filteredType)
-          })
-          
-
-        return res.status(201).send('Pokemon created successfully'); 
-    }  
-    catch (error) {
-        return error;
-    }
-    
-});
 
 
 module.exports = router;
