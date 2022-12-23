@@ -5,7 +5,8 @@ import { GET_POKEMONS,
   ORDER_BY_ATTACK,
   SORT_BY_TYPE,
   GET_POKEMON_BY_NAME, 
-  POST_POKEMON} from '../actions_Type/index.js'
+  POST_POKEMON,
+  GET_POKEMON_BY_ID} from '../actions_Type/index.js'
 
 const initialState = {
   pokemons: [],
@@ -113,6 +114,11 @@ function rootReducer(state = initialState, action){
       return {
         ...state,
       }
+      case GET_POKEMON_BY_ID :
+        return {
+          ...state,
+          pokemonDetails: action.payload
+        }
     default:
       return state;
 

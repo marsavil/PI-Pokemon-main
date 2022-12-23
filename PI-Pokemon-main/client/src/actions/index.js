@@ -7,6 +7,7 @@ import {
   ORDER_BY_ATTACK,
   SORT_BY_TYPE,
   GET_POKEMON_BY_NAME,
+  GET_POKEMON_BY_ID,
 } from "../actions_Type";
 
 export function getPokemons() {
@@ -65,6 +66,22 @@ export function getPokemonByName(payload) {
       console.log(error);
     }
   };
+}
+export function getPokemonById(id){
+  return async function (dispatch){
+    try {
+      var json = await axios.get(`http://localhost:3001/pokemons/${id}`, {});
+      console.log(json)
+      console.log('hola')
+      return dispatch({
+        type: GET_POKEMON_BY_ID,
+        payload: json.data
+      })
+
+    } catch (error) {
+      console.log('error en getPokemonById')
+    }
+  }
 }
 export function postPokemon(payload) {
   return async function (dispatch) {

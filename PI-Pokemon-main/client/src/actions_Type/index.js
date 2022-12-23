@@ -5,4 +5,5 @@ export const ORDER_BY_NAME = 'ORDER_BY_NAME';
 export const ORDER_BY_ATTACK = 'ORDER_BY_ATTACK';
 export const SORT_BY_TYPE = 'SORT_BY_TYPE';
 export const  GET_POKEMON_BY_NAME = ' GET_POKEMON_BY_NAME';
-export const POST_POKEMON = 'POST_POKEMON'
+export const POST_POKEMON = 'POST_POKEMON';
+export const GET_POKEMON_BY_ID = 'GET_POKEMON_BY_ID';

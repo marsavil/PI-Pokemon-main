@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function Card({ name, image, types }) {
+export default function Card({ name, image, types, id }) {
   return (
     <div>
       <img src={image} alt="image not found" width="200px" height="200px" />
-      <h3>{name}</h3>
+      <Link to={`/home/${id}`}><h3>{name}</h3></Link>
       <div>
         {types &&
           types.map((t) => {

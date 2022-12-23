@@ -111,11 +111,15 @@ export default function Home() {
             currentPokemons.map((p) => {
               return (
                 <div key={p.id}>
-                  <Card name={p.name} image={p.image} types={p.types} />
+                  <Card name={p.name} image={p.image} types={p.types} id={p.id} />
                 </div>
               );
             })}
         </div>
+        <Paginado
+        pokemonsPerPage={pokemonsPerPage}
+        allPokemons={allPokemons.length}
+        paginado={paginado}/>
       </div>
     </div>
   );

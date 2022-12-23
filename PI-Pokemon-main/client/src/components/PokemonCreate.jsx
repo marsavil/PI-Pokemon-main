@@ -20,7 +20,7 @@ export default function PokemonCreate() {
   });
   useEffect(() => {
     dispatch(getTypes());
-  }, []);
+  }, [dispatch]);
 
   function handleChange(e){
     setInput({
@@ -52,6 +52,12 @@ export default function PokemonCreate() {
       types: []
     })
     history.push('/home')
+  }
+  function handleDelete(el){
+    setInput({
+      ...input,
+      types: input.types.filter(t => t !== el)
+    })
   }
 
   return (
@@ -102,6 +108,13 @@ export default function PokemonCreate() {
         <ul><li>{input.types.map(t => t +', ')}</li></ul>
         <button type='submit'>Create Pokemon</button>
       </form>
+      {console.log(input.types)}
+      {input.types.map(t => 
+        <div className= 'delTypes'>
+          <p>{t}</p>
+          <button className="buttonX" onClick={() => handleDelete(t)}>X</button>
+        </div>
+        )}
     </div>
   );
 }
