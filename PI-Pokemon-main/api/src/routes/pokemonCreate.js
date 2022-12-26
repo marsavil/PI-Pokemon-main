@@ -48,7 +48,7 @@ router.post("/", async (req, res, next) => {
 
     return res.status(201).send("Pokemon created successfully");
   } catch (error) {
-    return error;
+    res.status(400).send('error');
   }
 });
 

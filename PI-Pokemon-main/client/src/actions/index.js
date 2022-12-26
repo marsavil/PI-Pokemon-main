@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import {
   GET_POKEMONS,
   GET_TYPES,
@@ -63,7 +63,8 @@ export function getPokemonByName(payload) {
         payload: json.data,
       });
     } catch (error) {
-      console.log(error);
+      
+      alert(error.message+' No pokemon exists with the name given');
     }
   };
 }
@@ -85,8 +86,14 @@ export function getPokemonById(id){
 }
 export function postPokemon(payload) {
   return async function (dispatch) {
-    const json = await axios.post("http://localhost:3001/pokemon", payload);
-    console.log(json);
-    return json;
+    try {
+      const json = await axios.post("http://localhost:3001/pokemon", payload);
+      console.log(json)
+      alert(json.data)
+      return json
+    } catch (error) {
+      alert (error.response.data.error)
+    }
+    
   };
 }
