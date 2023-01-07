@@ -17,7 +17,7 @@ async function getPokemonsFromApi(){ // trae los pokemons de la api
                 hp: p.data.stats[0].base_stat,
                 attack: p.data.stats[1].base_stat,
                 defense: p.data.stats[2].base_stat,
-                speed: p.data.stats[3].base_stat,
+                speed: p.data.stats[5].base_stat,
                 height: p.data.height,
                 weight: p.data.weight,
                 types: p.data.types.map((t) => {
@@ -85,6 +85,7 @@ async function getPokemonByIdFromApi(id) {
   } catch(error){
       return null;
   }
+  
 }
 
 async function getPokemonByNameFromApi(name) {

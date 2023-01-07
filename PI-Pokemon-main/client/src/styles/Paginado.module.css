@@ -1,0 +1,24 @@
+.paginado{
+    list-style:none;
+}
+.nav{
+    align-content: space-between;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+.page{
+    border-radius: 5%;
+    align-content: space-between;
+    cursor: grab;
+    display: inline;
+    padding-left:10px;
+    padding-right: 10px;
+    border: 5px;
+    
+    background-color:rgb(209, 230, 29)
+}
+.page:hover{
+    background-color:rgb(170, 184, 44);
+    cursor: pointer;
+}

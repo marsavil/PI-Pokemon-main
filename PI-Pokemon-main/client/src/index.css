@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'Pokemon';
+  src: local('PocketMonk'),url('./fonts/PocketMonk-15ze.ttf') format ('ttf');
+}

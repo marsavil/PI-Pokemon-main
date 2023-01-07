@@ -32,13 +32,15 @@ function rootReducer(state = initialState, action){
         types: action.payload
       }
     case FILTER_BY_ORIGIN :
-      const allPokemons = state.filteredPokemons;
+      const allPokemons = state.pokemons;
       const filteredPokemons = action.payload === 'db' ? allPokemons.filter(p => p.createdInDB): allPokemons.filter(p => !p.createdInDB)
       return {
         ...state,
         filteredPokemons: action.payload === 'all' ? state.pokemons : filteredPokemons
       }
     case ORDER_BY_NAME :
+      let pokemons = state.pokemons.map(p => {
+        return p})
       let sortedPokemons = action.payload === 'A-to-Z' ?
       state.filteredPokemons.sort(function(a,b){
         if(a.name > b.name){
@@ -60,7 +62,7 @@ function rootReducer(state = initialState, action){
       })
       return {
         ...state,
-        filteredPokemons: sortedPokemons
+        filteredPokemons:  sortedPokemons
       }
     case ORDER_BY_ATTACK :
       let sortedPokemonsByAttack = action.payload === 'asc' ?

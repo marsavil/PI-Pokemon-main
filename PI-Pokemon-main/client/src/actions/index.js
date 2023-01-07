@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import {
   GET_POKEMONS,
   GET_TYPES,
@@ -73,7 +73,6 @@ export function getPokemonById(id){
     try {
       var json = await axios.get(`http://localhost:3001/pokemons/${id}`, {});
       console.log(json)
-      console.log('hola')
       return dispatch({
         type: GET_POKEMON_BY_ID,
         payload: json.data

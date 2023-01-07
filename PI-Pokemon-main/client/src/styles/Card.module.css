@@ -1,0 +1,27 @@
+.container{
+    display: flex;
+    padding: 30px;
+    /* border: 15px;
+    max-width: 50%; */
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+.name{
+    text-decoration: none;
+    background-color: rgba(177, 168, 39, 0.397);
+}
+.types{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(250, 235, 215, 0.774);
+    background-color: rgba(15, 104, 107, 0.884);
+    padding: 40px;
+}
+.image{
+    background-color: rgba(231, 224, 12, 0.493);
+    padding:10 px;
+    border-style:solid;
+    
+    box-shadow: 15px;
+}

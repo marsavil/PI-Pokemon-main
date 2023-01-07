@@ -1,5 +1,13 @@
+body{
+  background-image: url('./images/fondo.png');
+  background-attachment: fixed;
+  justify-content: center;
+}
 .App {
   text-align: center;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
 }
 
 .App-logo {
@@ -36,3 +44,4 @@
     transform: rotate(360deg);
   }
 }
+

@@ -1,0 +1,31 @@
+
+.btn{
+    border-radius: 50px;
+    font-family: 'verdana';
+    color: whitesmoke;
+    font-size: 38px;
+    max-height:auto;
+    background: linear-gradient(180deg, #65bce8 0%, #306485 49%, #30368a 50%, #9a68d8 100%);
+    background-size: 1px 100px;
+    transition: all .3s;
+}
+.btn:hover{
+    border-radius: 50px;
+    font-family: 'verdana';
+    color: whitesmoke;
+    font-size: 38px;
+    max-height:auto;
+    background-position: 0 -50px;
+    transition: all .3s;
+}
+.img{
+    border-radius: 20px;
+    opacity: 90%;
+    border-style: solid;
+}
+.img_container{
+    padding: 35px;
+}
+.tittle{
+    font-size: 60px;
+}
