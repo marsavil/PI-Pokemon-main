@@ -87,6 +87,7 @@ select{
 }
 .head{
     background-color: red;
+    background-image: url('../images/fondo2.png');
     width: 100%;
     padding: 30px;
     margin-bottom: 15px;

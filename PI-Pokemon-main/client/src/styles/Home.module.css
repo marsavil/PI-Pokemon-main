@@ -8,12 +8,13 @@
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
-  background-color: red;
+  background-color: rgb(255, 0, 0);
+  background-image: url('../images/fondo2.png');
   border-style: solid;
   border-color: rgba(197, 21, 56, 0.719);
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 20px;
+  /* border-radius: 20px; */
   box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.329);
 }
 .tittle{
@@ -21,6 +22,9 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+.tittleImg{
+  border-radius: 10px;
 }
 .sort{
   display: flex;

@@ -78,7 +78,7 @@ export default function Home() {
     <div className={styles.home}>
       <div className={styles.head}>
         <div className={styles.tittle}>
-          <img src={tittle} alt="" width={'350px'} />
+          <img className={styles.tittleImg} src={tittle} alt="" width={'350px'} />
           <Link to="/pokemon">
             <button className={styles.btn2}>Create Pokemon</button>{" "}
           </Link>
