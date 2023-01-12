@@ -25,7 +25,9 @@ import shadow from "../images/shadow.png";
 import steel from "../images/steel.png";
 import water from "../images/water.png";
 import unknown from "../images/unknown.png";
+import ball from "../images/ball.png";
 import styles from "../styles/PokemonCreate.module.css";
+import tittle from '../images/tittle.gif'
 import capitalize from "../auxiliar_functions/capitalize";
 
 function validate(input) {
@@ -33,20 +35,20 @@ function validate(input) {
   if (!input.name) {
     errors.name = "A name is required";
   } else if (!input.image) {
-    errors.image = "You must select an image";
+    errors.image = "You must select an image or add a valid url";
   } else if (input.hp < 0 || input.hp > 999 || !input.hp) {
     errors.hp = "You must enter a valid number from 0 to 999";
-  } else if (input.attack < 0 || input.attack > 999 || !input.hp) {
+  } else if (input.attack < 0 || input.attack > 999 || !input.attack) {
     errors.attack = "You must enter a valid number from 0 to 999";
-  } else if (input.defense < 0 || input.defense > 999|| !input.defense) {
+  } else if (input.defense < 0 || input.defense > 999 || !input.defense) {
     errors.defense = "You must enter a valid number from 0 to 999";
   } else if (input.speed < 0 || input.speed > 999 || !input.speed) {
     errors.speed = "You must enter a valid number from 0 to 999";
+  } else if (input.height < 0 || input.height > 999 || !input.height) {
+    errors.height = "You must enter a valid number from 0 to 999";
   } else if (input.weight < 0 || input.weight > 999 || !input.weight) {
     errors.weight = "You must enter a valid number from 0 to 999";
-  } else if (input.height < 0 || input.height > 999 || !input.hp) {
-    errors.height = "You must enter a valid number from 0 to 999";
-  } else if (input.types === []) {
+  } else if (!input.types.length) {
     errors.types = "You must select, at least, one valid pokemon type";
   }
   return errors;
@@ -126,21 +128,25 @@ export default function PokemonCreate() {
       types: input.types.filter((t) => t !== el),
     });
   }
-  console.log(errors)
-  console.log(errors.types)
+  console.log(errors);
+  console.log(errors.types);
 
   return (
     <div className={styles.container}>
       <div className={styles.head}>
+        <div className={styles.tittle}>
+          <img src={tittle} alt="" width={'350px'} />
         <Link to="/home">
           <button className={styles.btnHome}>Return</button>
         </Link>
+        </div>
+        
         <h1>Create Your Pokemon</h1>
       </div>
       <div className={styles.form}>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <div>
-            <label>Name: </label>
+          <div className={styles.fields}>
+            <label className={styles.label}>Name: </label>
             <input
               type="text"
               value={input.name}
@@ -150,18 +156,29 @@ export default function PokemonCreate() {
             />
             {errors.name && <p className={styles.error}>{errors.name}</p>}
           </div>
-          <div>
-            |<label>Image: </label>
+          <div className={styles.fields}>
+            |<label className={styles.label}>Image: </label>
             <select required onChange={(e) => handleSelectedImage(e)}>
               <option>Select an image</option>
               <option value={image1}>Image 1</option>
               <option value={image2}>Image 2</option>
               <option value={image3}>Image 3</option>
             </select>
+            
             {errors.image && <p className={styles.error}>{errors.image}</p>}
           </div>
           <div>
-            <label>Hp: </label>
+          <label className={styles.label}>URL:</label>
+            <input
+              type="text"
+              value={input.image}
+              name="image"
+              required
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          <div className={styles.fields}>
+            <label className={styles.label}>Hp: </label>
             <input
               type="number"
               value={input.hp}
@@ -171,8 +188,8 @@ export default function PokemonCreate() {
             />
             {errors.hp && <p className={styles.error}>{errors.hp}</p>}
           </div>
-          <div>
-            <label>Attack: </label>
+          <div className={styles.fields}>
+            <label className={styles.label}>Attack: </label>
             <input
               type="number"
               value={input.attack}
@@ -182,8 +199,8 @@ export default function PokemonCreate() {
             />
             {errors.attack && <p className={styles.error}>{errors.attack}</p>}
           </div>
-          <div>
-            <label>Defense: </label>
+          <div className={styles.fields}>
+            <label className={styles.label}>Defense: </label>
             <input
               type="number"
               value={input.defense}
@@ -193,8 +210,8 @@ export default function PokemonCreate() {
             />
             {errors.defense && <p className={styles.error}>{errors.defense}</p>}
           </div>
-          <div>
-            <label>Speed: </label>
+          <div className={styles.fields}>
+            <label className={styles.label}>Speed: </label>
             <input
               type="number"
               value={input.speed}
@@ -204,8 +221,8 @@ export default function PokemonCreate() {
             />
             {errors.speed && <p className={styles.error}>{errors.speed}</p>}
           </div>
-          <div>
-            <label>Height: </label>
+          <div className={styles.fields}>
+            <label className={styles.label}>Height: </label>
             <input
               type="number"
               value={input.height}
@@ -215,8 +232,8 @@ export default function PokemonCreate() {
             />
             {errors.height && <p className={styles.error}>{errors.height}</p>}
           </div>
-          <div>
-            <label>Weight: </label>
+          <div className={styles.fields}>
+            <label className={styles.label}>Weight: </label>
             <input
               type="number"
               value={input.weight}
@@ -226,64 +243,78 @@ export default function PokemonCreate() {
             />
             {errors.weight && <p className={styles.error}>{errors.weight}</p>}
           </div>
-          <label>Types: </label>
-          <select required onChange={(e) => handleSelect(e)}>
-            <option>Select one or more types</option>
-            {errors.types && <p className={styles.error}>{errors.types}</p>}
-            {types.map((t) => (
-              <option value={t.name}>{t.name}</option>
-            ))}
-          </select>
-          {input.types.length? <button type="submit">Create Pokemon</button> :
-          <p className={styles.error}>You must select, at least, one valid pokemon type</p> }
-          
+          <div className={styles.fields}>
+            <label className={styles.label}>Types: </label>
+            <select required onChange={(e) => handleSelect(e)}>
+              <option>Select one or more types</option>
+              {errors.types && <p className={styles.error}>{errors.types}</p>}
+              {types.map((t) => (
+                <option value={t.name}>{t.name}</option>
+              ))}
+            </select>
+          </div>
+
+          {input.types.length ? (
+            <button type="submit">Create Pokemon</button>
+          ) : (
+            <p className={styles.error}>
+              You must fill in all the fields
+            </p>
+          )}
         </form>
+        <img className={styles.ball} src={ball}alt="" width={'200px'}/>
       </div>
       <div className={styles.preview}>
         <div className={styles.headPrev}>
-          <h2>{input.name}</h2>
-          <h2>{input.hp} HP</h2>
-          {input.types.includes("bug") ? (
-            <img src={bug} alt="" height="40px" width="40px" />
-          ) : input.types.includes("dark") ? (
-            <img src={dark} alt="" height="40px" width="40px" />
-          ) : input.types.includes("dragon") ? (
-            <img src={dragon} alt="" height="40px" width="40px" />
-          ) : input.types.includes("electric") ? (
-            <img src={electric} alt="" height="40px" width="40px" />
-          ) : input.types.includes("fairy") ? (
-            <img src={fairy} alt="" height="40px" width="40px" />
-          ) : input.types.includes("fighting") ? (
-            <img src={fighting} alt="" height="40px" width="40px" />
-          ) : input.types.includes("fire") ? (
-            <img src={fire} alt="" height="40px" width="40px" />
-          ) : input.types.includes("flying") ? (
-            <img src={flying} alt="" height="40px" width="40px" />
-          ) : input.types.includes("ghost") ? (
-            <img src={ghost} alt="" height="40px" width="40px" />
-          ) : input.types.includes("grass") ? (
-            <img src={grass} alt="" height="40px" width="40px" />
-          ) : input.types.includes("ground") ? (
-            <img src={ground} alt="" height="40px" width="40px" />
-          ) : input.types.includes("ice") ? (
-            <img src={ice} alt="" height="40px" width="40px" />
-          ) : input.types.includes("normal") ? (
-            <img src={normal} alt="" height="40px" width="40px" />
-          ) : input.types.includes("poison") ? (
-            <img src={poison} alt="" height="40px" width="40px" />
-          ) : input.types.includes("psychic") ? (
-            <img src={psychic} alt="" height="40px" width="40px" />
-          ) : input.types.includes("rock") ? (
-            <img src={rock} alt="" height="40px" width="40px" />
-          ) : input.types.includes("shadow") ? (
-            <img src={shadow} alt="" height="40px" width="40px" />
-          ) : input.types.includes("steel") ? (
-            <img src={steel} alt="" height="40px" width="40px" />
-          ) : input.types.includes("water") ? (
-            <img src={water} alt="" height="40px" width="40px" />
-          ) : (
-            <img src={unknown} alt="" height="40px" width="40px" />
-          )}
+          <div className={styles.name}>
+            <h2>{input.name.slice(0, 21)}</h2>
+          </div>
+          <div className={styles.hp}>
+            <h2>{input.hp.slice(0, 3)} HP</h2>
+          </div>
+          <div>
+            {input.types.includes("bug") ? (
+              <img src={bug} alt="" height="40px" width="40px" />
+            ) : input.types.includes("dark") ? (
+              <img src={dark} alt="" height="40px" width="40px" />
+            ) : input.types.includes("dragon") ? (
+              <img src={dragon} alt="" height="40px" width="40px" />
+            ) : input.types.includes("electric") ? (
+              <img src={electric} alt="" height="40px" width="40px" />
+            ) : input.types.includes("fairy") ? (
+              <img src={fairy} alt="" height="40px" width="40px" />
+            ) : input.types.includes("fighting") ? (
+              <img src={fighting} alt="" height="40px" width="40px" />
+            ) : input.types.includes("fire") ? (
+              <img src={fire} alt="" height="40px" width="40px" />
+            ) : input.types.includes("flying") ? (
+              <img src={flying} alt="" height="40px" width="40px" />
+            ) : input.types.includes("ghost") ? (
+              <img src={ghost} alt="" height="40px" width="40px" />
+            ) : input.types.includes("grass") ? (
+              <img src={grass} alt="" height="40px" width="40px" />
+            ) : input.types.includes("ground") ? (
+              <img src={ground} alt="" height="40px" width="40px" />
+            ) : input.types.includes("ice") ? (
+              <img src={ice} alt="" height="40px" width="40px" />
+            ) : input.types.includes("normal") ? (
+              <img src={normal} alt="" height="40px" width="40px" />
+            ) : input.types.includes("poison") ? (
+              <img src={poison} alt="" height="40px" width="40px" />
+            ) : input.types.includes("psychic") ? (
+              <img src={psychic} alt="" height="40px" width="40px" />
+            ) : input.types.includes("rock") ? (
+              <img src={rock} alt="" height="40px" width="40px" />
+            ) : input.types.includes("shadow") ? (
+              <img src={shadow} alt="" height="40px" width="40px" />
+            ) : input.types.includes("steel") ? (
+              <img src={steel} alt="" height="40px" width="40px" />
+            ) : input.types.includes("water") ? (
+              <img src={water} alt="" height="40px" width="40px" />
+            ) : (
+              <img src={unknown} alt="" height="40px" width="40px" />
+            )}
+          </div>
         </div>
         <div className={styles.imageTypePrev}>
           <div className={styles.imageContainerPrev}>
@@ -299,21 +330,21 @@ export default function PokemonCreate() {
         </div>
         <div className={styles.abilities}>
           <div className={styles.attackPrev}>
-            <h3>ATTACK: {input.attack}</h3>
+            <h3 className={styles.inputs}>ATTACK: {input.attack}</h3>
           </div>
           <div className={styles.defensePrev}>
-            <h3>DEFENSE: {input.defense}</h3>
+            <h3 className={styles.inputs}>DEFENSE: {input.defense}</h3>
           </div>
           <div className={styles.speedPrev}>
-            <h3>SPEED: {input.speed}</h3>
+            <h3 className={styles.inputs}>SPEED: {input.speed}</h3>
           </div>
         </div>
         <div className={styles.mass}>
           <div className={styles.heightPrev}>
-            <h3>HEIGHT: {input.height}</h3>
+            <h3 className={styles.inputs}>HEIGHT: {input.height}</h3>
           </div>
           <div className={styles.weightPrev}>
-            <h3>WEIGHT: {input.weight}</h3>
+            <h3 className={styles.inputs}>WEIGHT: {input.weight}</h3>
           </div>
         </div>
         {input.types.map((t) => (

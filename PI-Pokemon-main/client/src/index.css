@@ -12,7 +12,3 @@ code {
     monospace;
 }
 
-@font-face {
-  font-family: 'Pokemon';
-  src: local('PocketMonk'),url('./fonts/PocketMonk-15ze.ttf') format ('ttf');
-}

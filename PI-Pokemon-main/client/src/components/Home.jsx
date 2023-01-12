@@ -14,6 +14,7 @@ import Card from "./Card";
 import Paginado from "./Paginado";
 import SearchBar from "./SearchBar";
 import styles from "../styles/Home.module.css";
+import tittle from "../images/tittle.gif";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -76,63 +77,100 @@ export default function Home() {
   return (
     <div className={styles.home}>
       <div className={styles.head}>
-      <h1 className={styles.tittle}>The Ultimate Pokemon App</h1>
-        <label>Sort by Name </label>
-        <select className={styles.option} onChange={(e) => handleOrderByName(e)}>
-          <option className={styles.option} value="noSort">Initial State</option>
-          <option value="A-to-Z">A-Z</option>
-          <option value="Z-to-A">Z-A</option>
-        </select>
-        <label> Sort by Strength Attack </label>
-        <select className={styles.option} onChange={(e) => handleOrderByAttack(e)}>
-          <option value="noSort">Initial State</option>
-          <option value="asc">Min_Attack</option>
-          <option value="desc">Max_Attack</option>
-        </select>
-        <label> Source </label>
-        <select className={styles.option}onChange={(e) => handleFilterOrigin(e)}>
-          <option value="all">All</option>
-          <option value="api">Our Pokemons</option>
-          <option value="db">Created Pokemons</option>
-        </select>
-        <select  className={styles.option}  onChange={(e) => handleType(e)}>
-          <option value="allTypes">All Types</option>
+        <div className={styles.tittle}>
+          <img src={tittle} alt="" width={'350px'} />
+          <Link to="/pokemon">
+            <button className={styles.btn2}>Create Pokemon</button>{" "}
+          </Link>
+        </div>
+        <div className={styles.sort}>
+          <div className={styles.sortLabel}>
+            <h3>by Name</h3>
+          </div>
+          <div className={styles.sortSelect}>
+            <select
+              className={styles.option}
+              onChange={(e) => handleOrderByName(e)}
+            >
+              <option className={styles.option} value="noSort">
+                Initial State
+              </option>
+              <option value="A-to-Z">A-Z</option>
+              <option value="Z-to-A">Z-A</option>
+            </select>
+          </div>
+          <div className={styles.sortLabel}>
+            <h3>by Attack</h3>
+          </div>
+          <div className={styles.sortSelect}>
+            <select
+              className={styles.option}
+              onChange={(e) => handleOrderByAttack(e)}
+            >
+              <option value="noSort">Initial State</option>
+              <option value="asc">Min_Attack</option>
+              <option value="desc">Max_Attack</option>
+            </select>
+          </div>
+          <div className={styles.sortReset}>
+            <button
+              className={styles.btn}
+              onClick={(e) => {
+                handleClick(e);
+              }}
+            >
+              Restore
+            </button>
+          </div>
+        </div>
+        <div className={styles.filter}>
+          <div className={styles.filterLabel}>
+            <h3>FILTER</h3>
+          </div>
+          <div className={styles.filterSelect}>
+            <select
+              className={styles.option}
+              onChange={(e) => handleFilterOrigin(e)}
+            >
+              <option value="all">All</option>
+              <option value="api">Our Pokemons</option>
+              <option value="db">Created Pokemons</option>
+            </select>
+            <select className={styles.option} onChange={(e) => handleType(e)}>
+              <option value="allTypes">All Types</option>
 
-          <Fragment>
-            {allTypes &&
-              allTypes.map((t) => {
-                return (
-                  <Fragment key={t.id}>
-                    <option value={t.name}>{t.name}</option>
-                  </Fragment>
-                );
-              })}
-          </Fragment>
-        </select>
-        <button className={styles.btn}
-          onClick={(e) => {
-            handleClick(e);
-          }}
-        >
-          Restore
-        </button>
-        <Link to="/pokemon">
-          <button className={styles.btn2}>Create Pokemon</button>{" "}
-        </Link>
-        <Paginado
-          pokemonsPerPage={pokemonsPerPage}
-          allPokemons={allPokemons.length}
-          paginado={paginado}
-        />
-        <SearchBar />
+              <Fragment>
+                {allTypes &&
+                  allTypes.map((t) => {
+                    return (
+                      <Fragment key={t.id}>
+                        <option value={t.name}>{t.name}</option>
+                      </Fragment>
+                    );
+                  })}
+              </Fragment>
+            </select>
+          </div>
+        </div>
+        <div className={styles.searchBarContainer}>
+          <SearchBar />
+          <Paginado
+            pokemonsPerPage={pokemonsPerPage}
+            allPokemons={allPokemons.length}
+            paginado={paginado}
+          />
+        </div>
+        <div className={styles.buttons}>
+          
+        </div>
       </div>
       <div className={styles.Card_container}>
         {currentPokemons &&
           currentPokemons.map((p) => {
             //console.log(currentPokemons)
-            console.log(p)
+            console.log(p);
             return (
-              <div key={p.id}>
+              <div className={styles.card} key={p.id}>
                 <Card name={p.name} image={p.image} types={p.types} id={p.id} />
               </div>
             );
@@ -145,6 +183,7 @@ export default function Home() {
           paginado={paginado}
         />
       </div>
+      <div></div>
     </div>
   );
 }

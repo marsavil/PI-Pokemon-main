@@ -3,9 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import { getPokemonById } from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../styles/Detail.module.css";
-import image1 from "../images/muestra1.png";
-import image2 from "../images/muestra2.png";
-import image3 from "../images/muestra3.png";
 import bug from "../images/bug.png";
 import dark from "../images/dark.png";
 import dragon from "../images/dragon.png";
@@ -26,6 +23,7 @@ import shadow from "../images/shadow.png";
 import steel from "../images/steel.png";
 import water from "../images/water.png";
 import unknown from "../images/unknown.png";
+import ball from "../images/ball.png"
 
 export default function Detail() {
   const { id } = useParams();
@@ -44,10 +42,31 @@ export default function Detail() {
       <div className={styles.headPrev}>
         <h1>{pokemon.name}</h1>
         <h1>{pokemon.hp} HP</h1>
+        {!pokemon.types ? <img src={unknown} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'bug' ? <img src={bug} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'dark' ? <img src={dark} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'dragon' ? <img src={dragon} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'electric' ? <img src={electric} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'fairy' ? <img src={fairy} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'fighting' ? <img src={fighting} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'fire' ? <img src={fire} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'flying' ? <img src={flying} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'ghost' ? <img src={ghost} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'grass' ? <img src={grass} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'ground' ? <img src={ground} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'ice' ? <img src={ice} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'normal' ? <img src={normal} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'poison' ? <img src={poison} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'psychic' ? <img src={psychic} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'rock' ? <img src={rock} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'shadow' ? <img src={shadow} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'steel' ? <img src={steel} alt="" height="40px" width="40px" />
+        :<img src={unknown} alt="" height="40px" width="40px" /> }
       </div>
       <div className={styles.imageTypePrev}>
         <div className={styles.imageContainerPrev}>
-          <img src={pokemon.image} alt="" height="200px" width="200px" />
+          {pokemon.image ? <img src={pokemon.image} alt="" height="200px" width="200px" />
+          : <img src={ball} alt="" height="200px" width="200px" />}
         </div>
         <div className={styles.typesContainer}>
           <ul>
@@ -81,7 +100,7 @@ export default function Detail() {
         </div>
       </div>
       <Link to="/home">
-        <button className={styles.btn}>Return Home</button>
+        <button className={styles.btn}>Home</button>
       </Link>
     </div>
   );

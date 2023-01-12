@@ -64,7 +64,7 @@ export function getPokemonByName(payload) {
       });
     } catch (error) {
       
-      alert(error.message+' No pokemon exists with the name given');
+      alert(' No pokemon exists with the name given');
     }
   };
 }
