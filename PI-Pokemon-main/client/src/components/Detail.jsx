@@ -61,6 +61,7 @@ export default function Detail() {
         :pokemon.types[0].name === 'rock' ? <img src={rock} alt="" height="40px" width="40px" />
         :pokemon.types[0].name === 'shadow' ? <img src={shadow} alt="" height="40px" width="40px" />
         :pokemon.types[0].name === 'steel' ? <img src={steel} alt="" height="40px" width="40px" />
+        :pokemon.types[0].name === 'water' ? <img src={water} alt="" height="40px" width="40px" />
         :<img src={unknown} alt="" height="40px" width="40px" /> }
       </div>
       <div className={styles.imageTypePrev}>
